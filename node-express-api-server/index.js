@@ -5,10 +5,10 @@ const app = express();
 const manufacturer_data = require('./data/manufacturers.json');
 const product_list_data = require('./data/products.json');
 
-app.get('/', function (req, res) {
-  res.json({
+app.get('/',function(req, res){
+  res.json({ 
     status: 'Accepted',
-    welcomeText: 'Hello, Welcome to Api Repo'
+    welcomeText: 'Hello, Welcome to Api Repo' 
   },);
 })
 
@@ -22,9 +22,9 @@ app.group('/', function (router) {
   });
 });
 
-app.group('/api/v1', function (router) {
+app.group('/api/v1', function (router){
 
-  router.get('/manufacturers', function (req, res) {
+  router.get('/manufacturers', function (req, res){
     res.json({
       status: 'Accepted',
       manufacturers: manufacturer_data
@@ -38,7 +38,7 @@ app.group('/api/v1', function (router) {
     });
   });
 
-  router.get('/get/product/:serial/:manufacturer', function (req, res) {
+  router.get('/get/product/:serial/:manufacturer',function(req, res){
     const givenSerial = req.params.serial;
     const givenManufacturer = req.params.manufacturer;
     const finalGivenManufacturer = givenManufacturer.charAt(0).toUpperCase() + givenManufacturer.slice(1);
@@ -51,10 +51,9 @@ app.group('/api/v1', function (router) {
       givenManufacturer: givenManufacturer
     });
     res.status(200).json({
-      status: 'Accepted',
+      status:'Accepted',
       found_product: found_product
     });
-    return;
   });
 });
 
@@ -69,6 +68,6 @@ app.get('*', function (req, res) {
 
 
 const port = process.env.PORT;
-app.listen(port, function () {
+app.listen(port, function(){
   console.log(`Listening to port ${port}`)
 });
