@@ -6,10 +6,10 @@ const manufacturer_data = require('./data/manufacturers.json');
 const product_list_data = require('./data/products.json');
 
 app.get('/',function(req, res){
-  res.json({ 
+  res.status(200).json({ 
     status: 'Accepted',
     welcomeText: 'Hello, Welcome to Api Repo' 
-  },);
+  });
 })
 
 app.group('/', function (router) {
@@ -25,14 +25,14 @@ app.group('/', function (router) {
 app.group('/api/v1', function (router){
 
   router.get('/manufacturers', function (req, res){
-    res.json({
+    res.status(200).json({
       status: 'Accepted',
       manufacturers: manufacturer_data
     });
   });
 
   router.get('/get/product/list', function (req, res) {
-    res.json({
+    res.status(200).json({
       status: 'Accepted',
       product_list: product_list_data
     });
