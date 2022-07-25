@@ -1,0 +1,99 @@
+[
+  {
+    "serial":"0001",
+    "category": "Phone",
+    "product_name": "Iphone 7",
+    "manufacturer": "Apple"
+  },
+    {
+      "serial": "0002",
+      "category": "Phone",
+      "product_name": "Iphone 8",
+      "manufacturer": "Apple"
+    },
+      {
+        "serial": "0003",
+        "category": "Phone",
+        "product_name": "Iphone 10",
+        "manufacturer": "Apple"
+      },
+        {
+          "serial": "0004",
+          "category": "Phone",
+          "product_name": "Iphone 11",
+          "manufacturer": "Apple"
+        },
+          {
+            "serial": "0005",
+            "category": "Phone",
+            "product_name": "Pixel 1",
+            "manufacturer": "Google"
+          },
+          {
+            "serial": "0006",
+            "category": "Phone",
+            "product_name": "Pixel 2",
+            "manufacturer": "Google"
+          },
+          {
+            "serial": "0007",
+            "category": "Phone",
+            "product_name": "Pixel 3",
+            "manufacturer": "Google"
+          },
+          {
+            "serial": "0008",
+            "category": "Phone",
+            "product_name": "Pixel 4",
+            "manufacturer": "Google"
+          },
+          {
+            "serial": "0009",
+            "category": "TV",
+            "product_name": "LG C2 77-inch evo OLED TV",
+            "manufacturer": "Lg"
+          },
+          {
+            "serial": "0010",
+            "category": "TV",
+            "product_name": "LG 75 Inch Class UQ9000 PUD series LED 4K UHD Smart webOS 22 w/ ThinQ AI TV",
+            "manufacturer": "Lg"
+          },
+          {
+            "serial": "0011",
+            "category": "TV",
+            "product_name": "LG 75 Inch Class NANO75 UQA series LED 4K UHD Smart webOS 22 w/ ThinQ AI TV",
+            "manufacturer": "Lg"
+          },
+          {
+            "serial": "0012",
+            "category": "TV",
+            "product_name": "LG 86 Inch Class QNED80 UQA series LED 4K UHD Smart webOS 22 w/ ThinQ AI TV",
+            "manufacturer": "Lg"
+          },
+          {
+            "serial": "0013",
+            "category": "TV",
+            "product_name": "Z9K | BRAVIA XR | MASTER Series | Mini LED | 8K | High Dynamic Range (HDR) | Smart TV (Google TV)",
+            "manufacturer": "Sony"
+          },
+          {
+            "serial": "0014",
+            "category": "TV",
+            "product_name": "Z9J | BRAVIA XR | MASTER Series| Full Array LED | 8K | High Dynamic Range (HDR) | Smart TV (Google TV)V",
+            "manufacturer": "Sony"
+          },
+          {
+            "serial": "0015",
+            "category": "TV",
+            "product_name": "A95K | BRAVIA XR | MASTER Series | OLED | 4K Ultra HD | High Dynamic Range (HDR) | Smart TV (Google TV)",
+            "manufacturer": "Sony"
+          },
+          {
+            "serial": "0016",
+            "category": "TV",
+            "product_name": "A90K | BRAVIA XR | MASTER Series | OLED | 4K Ultra HD | High Dynamic Range (HDR) | Smart TV (Google TV)",
+            "manufacturer": "Sony"
+          }
+
+]
