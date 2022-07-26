@@ -1,4 +1,4 @@
-# Express-js-api-server 🛰
+# Express-js-api-backend-server 🛰
 
 This is a backend api providing system made with Express js (Node js framework)
 
