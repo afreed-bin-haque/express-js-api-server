@@ -1,14 +1,9 @@
 import express from 'express';
 import 'express-group-routes';
 const router = express.Router();
+import { Index } from '../controllers/web/IndexController.js'
 
-router.get('/', function (req, res) {
-  res.status(200).json({
-    status: 'Accepted',
-    message: 'Welcome to Astro Ecom',
-    author: 'Afreed Bin Haque'
-  });
-})
+router.get('/', Index);
 
 
 export default router
