@@ -1,23 +1,14 @@
-import 'dotenv/config'
-import 'express-group-routes';
-import express from 'express';
-const app = express();
-import api from './routes/api.js';
-import web from './routes/web.js';
+require('dotenv').config();
+const expressApp = require('express');
+const app = expressApp();
+const port = process.env.APP_PORT||3000;
+const apiRouter = require('./routes/api');
+app.use('/api', apiRouter);
 
-app.use('/', web);
-
-app.use('/api', api);
-
-app.use(function (req, res, next) {
-  res.status(404).json({
-     status: 'Not found',
-     message: 'Requested page not found'
-  });
+app.get('/', function (req, res) {
+  res.redirect('/api/v1');
 });
 
-
-const port = process.env.PORT;
-app.listen(port, function(){
-  console.log(`Listening to port ${port}`)
+app.listen(port,function(){
+  console.log(`App started on port: ${port}`);
 });
