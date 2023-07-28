@@ -2,32 +2,22 @@ const jwt = require('jsonwebtoken');
 const errorHandler = require('../../errors/errorHandler');
 
 const verifyUser = function (req, res, next) {
-  const token = req.query.token;
-  if (!token) {
-    errorHandler.accessForbidden(req, res);
-  } else {
-    try{
-      const jwt = require('jsonwebtoken');
-
-      /* const payload = {
-        accessToken: 'erw1f3nwfg13e2f1w3n5awgeahba3251032g1av',
-        permission: 'true',
-        type: 'admin',
-        user: 'Afreen-Bin-Haqe'
-      };
-
-      const secretKey = 'cuatrodev-secret-access-key';
-
-      const token = jwt.sign(payload, secretKey, { expiresIn: '1h' }); */
-
-     /*  console.log(token);
-      const decodedToken = jwt.verify(token, 'cuatrodev-secret-access-key');
-      const user = decodedToken.user;
-      const permission = decodedToken.permission;
-      const userType = decodedToken.type;
-      console.log(decodedToken); */
-      next();
-    }catch(error){
+  try{
+    const token = req.headers['authorization'];
+    const decodedToken = jwt.verify(token, 'cuatrodev-secret-access-key',);
+    const user = decodedToken.user;
+    const permission = decodedToken.permission;
+    const userType = decodedToken.type;
+    console.log('auth token: ',token);
+    next();
+  }catch(error){
+    if(process.env.APP_STATUS === 'local'){
+      res.status(422).json({
+          status: '4222',
+          message: 'Unprocessable error occured',
+          error: error.message
+      });
+    }else{
       errorHandler.internalServerError(req, res);
     }
   }
