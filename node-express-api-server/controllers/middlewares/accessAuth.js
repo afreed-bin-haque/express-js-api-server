@@ -28,7 +28,6 @@ const verifyUser = function (req, res, next) {
       console.log(decodedToken); */
       next();
     }catch(error){
-      console.log(error);
       errorHandler.internalServerError(req, res);
     }
   }

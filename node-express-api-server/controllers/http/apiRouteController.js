@@ -30,11 +30,10 @@ exports.generateUserTokenized = function (req, res) {
       token: token
     });
   }catch(error){
-    console.log(error)
     res.status(422).json({
       status: '4222',
       message: 'Unprocessable error occured',
-      error: error
+      error: error.message
     });
   }
 };
