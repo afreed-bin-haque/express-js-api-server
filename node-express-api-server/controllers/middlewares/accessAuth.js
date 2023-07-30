@@ -1,15 +1,31 @@
-const jwt = require('jsonwebtoken');
 const errorHandler = require('../../errors/errorHandler');
+const helper = require('../helpers/helper');
+const crypto = require('crypto');
+const randomStrinngToken = helper.getRandomString(32); 
+
+const decryptData = function (encryptedDataWithIV, secretKey) {
+  const encryptedData = encryptedDataWithIV.encryptedData;
+  const cr = Buffer.from(encryptedDataWithIV.cr, 'hex');
+  const decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(secretKey), cr);
+  let decryptedData = decipher.update(encryptedData, 'hex', 'utf-8');
+  decryptedData += decipher.final('utf-8');
+  return JSON.parse(decryptedData);
+};
+
 
 const verifyUser = function (req, res, next) {
+  const crHex = req.headers['app_cr'];
+  const encryptedDataHex = req.headers['app_data'];
   try{
-    const token = req.headers['authorization'];
-    const decodedToken = jwt.verify(token, 'cuatrodev-secret-access-key',);
-    const user = decodedToken.user;
-    const permission = decodedToken.permission;
-    const userType = decodedToken.type;
-    console.log('auth token: ',token);
-    next();
+    const decryptedData = decryptData( {
+    cr:crHex,
+    encryptedData:encryptedDataHex
+  }, randomStrinngToken);
+    console.log('auth encryptedDataHex: ',decryptData);
+     res.status(422).json({
+          status: '4222',
+          test:decryptedData
+      });
   }catch(error){
     if(process.env.APP_STATUS === 'local'){
       res.status(422).json({
