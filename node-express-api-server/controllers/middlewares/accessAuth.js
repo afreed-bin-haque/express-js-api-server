@@ -1,40 +1,35 @@
 const errorHandler = require('../../errors/errorHandler');
 const helper = require('../helpers/helper');
-const crypto = require('crypto');
-const randomStrinngToken = helper.getRandomString(32); 
-
-const decryptData = function (encryptedDataWithIV, secretKey) {
-  const encryptedData = encryptedDataWithIV.encryptedData;
-  const cr = Buffer.from(encryptedDataWithIV.cr, 'hex');
-  const decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(secretKey), cr);
-  let decryptedData = decipher.update(encryptedData, 'hex', 'utf-8');
-  decryptedData += decipher.final('utf-8');
-  return JSON.parse(decryptedData);
-};
-
 
 const verifyUser = function (req, res, next) {
-  const crHex = req.headers['app_cr'];
-  const encryptedDataHex = req.headers['app_data'];
-  try{
-    const decryptedData = decryptData( {
-    cr:crHex,
-    encryptedData:encryptedDataHex
-  }, randomStrinngToken);
-    console.log('auth encryptedDataHex: ',decryptData);
-     res.status(422).json({
-          status: '4222',
-          test:decryptedData
-      });
-  }catch(error){
-    if(process.env.APP_STATUS === 'local'){
-      res.status(422).json({
+  const encData = req.headers['token'];
+  const secretKey = process.env.APP_SIGNATURE;
+  if (encData === null||encData === undefined){
+    errorHandler.accessForbidden(req, res);
+  }else{
+    try {
+      const decryptedData = helper.decryptData(encData, secretKey);
+      const signatureGiven = decryptedData?.signature;
+      const accessTokenGiven = decryptedData?.tokenPayload?.accessToken;
+      const typeGiven = decryptedData?.tokenPayload?.type;
+      const userGiven = decryptedData?.tokenPayload?.user;
+      const expiresInGiven = decryptedData?.tokenPayload?.expiresIn;
+      const validateUser = helper.verification(signatureGiven, accessTokenGiven, typeGiven, userGiven, expiresInGiven );
+      if (validateUser === true) {
+        next();
+      } else {
+        errorHandler.accessForbidden(req, res);
+      }
+    } catch (error) {
+      if (process.env.APP_STATUS === 'local') {
+        res.status(422).json({
           status: '4222',
           message: 'Unprocessable error occured',
-          error: error.message
-      });
-    }else{
-      errorHandler.internalServerError(req, res);
+          error: error.message,
+        });
+      } else {
+        errorHandler.internalServerError(req, res);
+      }
     }
   }
 };

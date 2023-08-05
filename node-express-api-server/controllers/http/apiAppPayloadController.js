@@ -30,8 +30,7 @@ exports.generateUserTokenized = function(req, res){
       'signature': secretKey,
       tokenPayload
     }
-    const encryption = helper.encryptdata(finalData,randomStrinngToken);
-    const decryptData = helper.decryptData(encryption,randomStrinngToken);
+    const encryption = helper.encryptdata(finalData, secretKey);
 
     const filePath = path.join(__dirname,'../../storages/verifyID.json');
     let prevData =[];
@@ -46,7 +45,7 @@ exports.generateUserTokenized = function(req, res){
         return res.status(200).json({
           status: '1001',
           message: 'Token created ✅ (User data updated)',
-          token: decryptData,
+          token: encryption
         });
       }
     }
